@@ -1,58 +1,82 @@
 import streamlit as st
 import pandas as pd
-import json
+import matplotlib.pyplot as plt
+import os
+
+# ====== 文字ボケ対策：Matplotlib設定 ======
+plt.rcParams["figure.dpi"] = 200
+plt.rcParams["savefig.dpi"] = 200
+
+plt.rcParams["font.family"] = "sans-serif"
+plt.rcParams["font.sans-serif"] = [
+    "Noto Sans CJK JP", "Noto Sans JP", "IPAexGothic", "IPAGothic",
+    "Yu Gothic", "Meiryo", "Hiragino Sans", "MS Gothic"
+]
+plt.rcParams["axes.unicode_minus"] = False
+
+@st.cache_data
+def load_csv(csv_path: str) -> pd.DataFrame:
+    return pd.read_csv(csv_path)
 
 def render():
-    st.markdown("## 📊 犯罪統計グラフ")
+    st.title("先月の事故統計(令和7年12月末")
 
-    # CSV読み込み
-    df = pd.read_csv("data/processed/crime_summary.csv")
+    base_dir = os.path.dirname(os.path.dirname(__file__))
+    csv_path = os.path.join(base_dir, "data", "processed", "tidy_accidents.csv")
 
+    df = load_csv(csv_path)
 
-    # ===== デバッグ用（最初は必ず表示）=====
-    st.write("📄 CSVの列名:", list(df.columns))
+    # 事故カテゴリ名を統一（念のため）
+    df["事故カテゴリ"] = df["事故カテゴリ"].replace({
+        "自転車関連事故": "自転車",
+        "高齢者関連事故": "高齢者",
+        "歩行者関連事故": "歩行者",
+        "こども関連事故": "こども",
+    })
 
-    # ===== 列名をここで合わせる =====
-    # 実際のCSVに存在する名前に修正すること
-    label_col = df.columns[0]   # 1列目（罪種など）
-    value_col = df.columns[1]   # 2列目（件数など）
+    # 地域リスト
+    regions_all = sorted(df["地域カテゴリ"].dropna().unique().tolist())
 
-    labels = df["罪種"].tolist()
-    values = df["認知件数_2025"].tolist()
+    # ====== 検索機能 ======
+    keyword = st.text_input("地域を検索（例：門司 / 北九州 / 佐賀）", "")
 
-    # ===== Chart.js 用データ =====
-    chart_data = {
-        "labels": labels,
-        "datasets": [
-            {
-                "label": value_col,
-                "data": values
-            }
-        ]
-    }
+    if keyword.strip():
+        regions = [r for r in regions_all if keyword in r]
+        if not regions:
+            st.warning("該当する地域が見つかりません。検索語を変えてみて。")
+            return
+    else:
+        regions = regions_all
 
-    chart_json = json.dumps(chart_data, ensure_ascii=False)
+    region = st.selectbox("地域（〇〇市・〇〇区）を選択", regions)
 
-    # ===== Chart.js 描画 =====
-    st.components.v1.html(
-        f"""
-        <canvas id="crimeChart"></canvas>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script>
-        const ctx = document.getElementById('crimeChart');
-        new Chart(ctx, {{
-            type: 'bar',
-            data: {chart_json},
-            options: {{
-                responsive: true,
-                scales: {{
-                    y: {{
-                        beginAtZero: true
-                    }}
-                }}
-            }}
-        }});
-        </script>
-        """,
-        height=500
+    # 集計
+    order = ["自転車", "高齢者", "歩行者", "こども"]
+    summary = (
+        df[df["地域カテゴリ"] == region]
+        .groupby("事故カテゴリ")["発生件数"]
+        .sum()
+        .reindex(order, fill_value=0)
     )
+
+    if summary.sum() == 0:
+        st.warning("この地域の事故データはありません。")
+        return
+
+    # 円グラフ
+    fig, ax = plt.subplots(figsize=(7.5, 5.5), dpi=200)
+    ax.set_title(f"{region} の事故内訳", fontsize=14)
+
+    ax.pie(
+        summary.values,
+        labels=summary.index,
+        autopct="%1.1f%%",
+        startangle=90,
+        textprops={"fontsize": 12},
+    )
+    ax.axis("equal")
+
+    st.pyplot(fig, use_container_width=True)
+
+    st.caption("件数（参考）")
+    st.dataframe(summary.rename("発生件数").reset_index())
