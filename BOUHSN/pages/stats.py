@@ -2,10 +2,6 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
-import matplotlib.pyplot as plt
-
-plt.rcParams["font.family"] = "Noto Sans CJK JP"
-plt.rcParams["axes.unicode_minus"] = False  # マイナス記号が豆腐になるの防止
 
 # ====== 文字ボケ対策：Matplotlib設定 ======
 plt.rcParams["figure.dpi"] = 200
