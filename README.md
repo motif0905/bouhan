@@ -55,8 +55,8 @@
 ---
 
 ## 画面構成図・設計資料
-- FigJam ＜https://www.figma.com/board/vyvIYYg4H9LNynmLhVsEtP/4%E5%B9%B4%E7%94%9F%E3%83%81%E3%83%BC%E3%83%A013-%E4%B8%AD%E5%B3%B6-?node-id=0-1&p=f&t=6lKUpJ1XQIUJQuRm-0＞
-- 画面構成図：＜https://www.figma.com/design/GcoyAS9c8gk3RgQoCv85Rj/%E7%94%BB%E9%9D%A2%E6%A7%8B%E6%88%90%E5%9B%B3?node-id=0-1&p=f&t=OCkG9ctxTOVvI91j-0＞
+- FigJam: https://www.figma.com/board/vyvIYYg4H9LNynmLhVsEtP/4%E5%B9%B4%E7%94%9F%E3%83%81%E3%83%BC%E3%83%A013-%E4%B8%AD%E5%B3%B6-?node-id=0-1&p=f&t=6lKUpJ1XQIUJQuRm-0
+- 画面構成図：https://www.figma.com/design/GcoyAS9c8gk3RgQoCv85Rj/%E7%94%BB%E9%9D%A2%E6%A7%8B%E6%88%90%E5%9B%B3?node-id=0-1&p=f&t=OCkG9ctxTOVvI91j-0
 
 ---
 
