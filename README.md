@@ -49,13 +49,14 @@
 統計データは福岡県警が公開しているデータを元に作成しています。
 
 （※ここにシステム構成図を配置）
-docs/system_diagram.png
+<img width="683" height="644" alt="image" src="https://github.com/user-attachments/assets/7ba533d0-b938-4616-8358-a504547f5b22" />
+
 
 ---
 
 ## 画面構成図・設計資料
-- FigJam：＜FigJamのURL＞
-- 画面構成図：＜画面構成図のURLまたは画像リンク＞
+- FigJam ＜https://www.figma.com/board/vyvIYYg4H9LNynmLhVsEtP/4%E5%B9%B4%E7%94%9F%E3%83%81%E3%83%BC%E3%83%A013-%E4%B8%AD%E5%B3%B6-?node-id=0-1&p=f&t=6lKUpJ1XQIUJQuRm-0＞
+- 画面構成図：＜vhttps://www.figma.com/design/GcoyAS9c8gk3RgQoCv85Rj/%E7%94%BB%E9%9D%A2%E6%A7%8B%E6%88%90%E5%9B%B3?node-id=0-1&p=f&t=OCkG9ctxTOVvI91j-0＞
 
 ---
 
