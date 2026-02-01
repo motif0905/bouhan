@@ -58,8 +58,15 @@
 
 ---
 
-## 起動手順
-1. リポジトリをクローン  
-```bash
-git clone https://github.com/motif0905/bouhan.git
-cd bouhan/BOUHSN
+## 起動手順（Streamlit Cloud）
+
+本アプリは Streamlit Cloud 上で公開しています。  
+以下の手順でブラウザから利用できます。
+
+1. GitHubリポジトリにアクセス  
+https://github.com/motif0905/bouhan/tree/main/BOUHSN
+
+2. Streamlit Cloud にデプロイされたURLにアクセス  
+（提出時にURLを記載）
+
+3. ブラウザ上でアプリが起動し、インストール不要で利用可能
