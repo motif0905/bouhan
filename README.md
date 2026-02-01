@@ -62,9 +62,9 @@ docs/system_diagram.png
 ## 起動手順（Streamlit Cloud）
 本アプリはStreamlit Cloud上にデプロイされています。
 
-1. GitHubリポジトリにアクセス  
-   https://github.com/motif0905/bouhan/tree/main/BOUHSN
-2. Streamlit Cloudの公開URLにアクセス
+1. Streamlit Cloudの公開URLにアクセス
+   https://bouhan-mg7ihxelofd7zylh3cxebk.streamlit.app
+
 3. ブラウザ上でアプリを利用可能（ローカル環境構築不要）
 
 ---
